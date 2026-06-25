@@ -10,7 +10,7 @@ const palette = {
   warnSoft: "#FEF3C7",
   go: "#15803D",
   goSoft: "#DCFCE7",
-  neutral: "#579dfe",
+  neutral: "#64748B",
   border: "#CBD5E1",
   arrowColor: "#94A3B8",
 };
@@ -213,10 +213,10 @@ export default function App() {
       {/* Header */}
       <div style={{ maxWidth: 560, margin: "0 auto 24px", background: palette.header, borderRadius: 12, padding: "16px 20px", color: "white" }}>
         <div style={{ fontSize: 11, letterSpacing: 2, opacity: 0.7, marginBottom: 4 }}>薬剤部 抗菌薬スチュワードシップ</div>
-        <div style={{ fontSize: 18, fontWeight: 700 }}>キノロン系 → 代替抗菌薬</div>
-        <div style={{ fontSize: 13, opacity: 0.85 }}>変更提案フローチャート</div>
+        <div style={{ fontSize: 18, fontWeight: 700 }}>キノロン系抗菌薬から他剤抗菌薬へ</div>
+        <div style={{ fontSize: 13, opacity: 0.85 }}>疑義照会ツール</div>
         <div style={{ marginTop: 10, background: "#E84C4C22", border: "1px solid #E84C4C88", borderRadius: 6, padding: "6px 10px", fontSize: 11, color: "#FECACA" }}>
-          ⚠ 本施設はフルオロキノロン耐性大腸菌が高率な環境です。キノロン系処方に対して積極的に代替薬変更を提案してください。
+          ⚠ 本施設はフルオロキノロン耐性大腸菌が蔓延している状況です。キノロン系抗菌薬処方の際はこのツールを活用して積極的な変更提案を行なってください。
         </div>
       </div>
 
@@ -227,12 +227,7 @@ export default function App() {
           <>
             <Box color={palette.header} bg="#EEF4FF">💊 キノロン系抗菌薬の処方を確認</Box>
             <Arrow />
-            <Box color={palette.warn} bg={palette.warnSoft}>
-              ① 緊急性・重篤度の確認<br />
-              <span style={{ fontWeight: 400, fontSize: 12 }}>敗血症ショック・ICU症例は主治医と個別協議</span>
-            </Box>
-            <Arrow />
-            <Box color={palette.header} bg="#EEF4FF">② 代替薬検討フローを開始</Box>
+            <Box color={palette.header} bg="#EEF4FF">耐性菌対策のために代替薬を検討</Box>
             <Arrow />
             <Btn onClick={() => setStep("allergy")}>フローを開始する →</Btn>
           </>
@@ -265,12 +260,9 @@ export default function App() {
               <ul style={{ fontSize: 13, color: "#7F1D1D", margin: 0, paddingLeft: 18 }}>
                 <li>アレルギー内容（アナフィラキシーか皮疹のみか）を詳細確認</li>
                 <li>ST合剤・ホスホマイシンなど非βラクタム系を検討</li>
-                <li>アレルギー科・感染症科にコンサルトを推奨</li>
                 <li>キノロン継続が必要な場合は主治医と協議のうえ記録を残す</li>
               </ul>
             </div>
-            <Arrow />
-            <Box color={palette.neutral} bg="#F1F5F9" style={{ fontSize: 13 }}>主治医に状況を伝え、個別対応へ</Box>
             <div style={{ marginTop: 16 }}><Btn onClick={reset} color={palette.neutral}>最初からやり直す</Btn></div>
           </>
         )}
@@ -443,7 +435,7 @@ export default function App() {
                   <p style={{ fontWeight: 700, color: palette.header, margin: "0 0 8px", fontSize: 14 }}>推奨代替抗菌薬</p>
                   <AlternativeCard option={{ drug: "ケフラール（セファクロル）/ オーグメンチン（AMPC/CVA）", note: "経口βラクタム系。3〜5日間投与。アモキシシリン単剤は感受性不明のため除外。", level: "第一推奨" }} />
                   <AlternativeCard option={{ drug: "ST合剤（TMP/SMX）", note: "経口投与可。3〜5日間投与。施設の耐性状況を考慮すること。", level: "第二推奨" }} />
-                  <AlternativeCard option={{ drug: "ホスホマイシン（経口）", note: "1回投与で完結。妊婦・高齢者にも使いやすい。", level: "代替選択肢" }} />
+                  <AlternativeCard option={{ drug: "ホスホマイシン（経口）", note: "1回1g 1日3回　2日間", level: "代替選択肢" }} />
                 </div>
               </>
             )}
@@ -471,22 +463,17 @@ export default function App() {
                 </div>
                 <div style={{ maxWidth: 480, width: "100%", marginTop: 4 }}>
                   <p style={{ fontWeight: 700, color: palette.header, margin: "0 0 8px", fontSize: 14 }}>推奨代替抗菌薬（感受性確認必須）</p>
-                  <AlternativeCard option={{ drug: "ST合剤（TMP/SMX）", note: "ESBL産生菌にも有効なことが多い。感受性ありの場合に第一選択。3〜5日間投与。", level: "第一推奨" }} />
-                  <AlternativeCard option={{ drug: "ファロム（ファロペネム）", note: "経口カルバペネム系。ST合剤が使用できない場合に選択。3〜5日間投与。", level: "第二推奨" }} />
+                  <AlternativeCard option={{ drug: "ST合剤（TMP/SMX）/ ホスホマイシン（経口）", note: "ST合剤：3〜5日間　ホスホマイシン：2日間を投与。", level: "第一推奨" }} />
                   <div style={{ border: "1.5px solid #7C3AED", borderRadius: 8, background: "#F5F3FF", padding: "10px 14px", marginBottom: 8, textAlign: "left" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                       <span style={{ fontSize: 10, fontWeight: 700, color: "#7C3AED", background: "white", border: "1px solid #7C3AED", borderRadius: 4, padding: "1px 6px", whiteSpace: "nowrap" }}>
-                        ST合剤・ファロム両方耐性かつキノロン感受性あり
+                        上記耐性かつキノロン感受性あり
                       </span>
                     </div>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: "#1A3A5C", margin: "0 0 4px" }}>ジェニナック（ガレノキサシン）</p>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: "#1A3A5C", margin: "0 0 4px" }}>ジェニナック（ガレノキサシン）　7日間</p>
                     <p style={{ fontSize: 12, color: "#475569", margin: 0 }}>
-                      フルオロキノロン系のため<strong>感受性確認が必須</strong>。当施設はフルオロキノロン耐性大腸菌が高率なため<strong>交差耐性に注意</strong>。使用前に主治医・感染症科と協議すること。
+                      フルオロキノロン系のため<strong>感受性確認が必須</strong>。当施設はフルオロキノロン耐性大腸菌が高率なため<strong>交差耐性に注意</strong>。
                     </p>
-                  </div>
-                  <div style={{ border: `1.5px solid ${palette.neutral}`, borderRadius: 8, background: "#F8FAFC", padding: "10px 14px", marginBottom: 8, textAlign: "left" }}>
-                    <p style={{ fontSize: 13, fontWeight: 700, color: palette.neutral, margin: "0 0 4px" }}>🏥 全ての薬剤に耐性の場合</p>
-                    <p style={{ fontSize: 12, color: "#475569", margin: 0 }}>感染症科へコンサルト。注射薬（カルバペネム系など）の適応を検討してください。</p>
                   </div>
                 </div>
               </>
@@ -494,7 +481,7 @@ export default function App() {
 
             <div style={{ border: `1.5px solid #6366F1`, borderRadius: 8, background: "#EEF2FF", padding: "10px 14px", maxWidth: 480, width: "100%", marginTop: 4 }}>
               <p style={{ fontWeight: 700, color: "#4338CA", margin: "0 0 4px", fontSize: 12 }}>📋 注意事項</p>
-              <p style={{ fontSize: 12, color: "#3730A3", margin: 0 }}>治療期間は原則3〜5日間。培養結果が出た場合は速やかにde-escalationを検討。再発・難治例は泌尿器科・感染症科へコンサルト。</p>
+              <p style={{ fontSize: 12, color: "#3730A3", margin: 0 }}>治療期間は原則3〜5日間。培養結果が出た場合は速やかにde-escalationを検討。再発・難治例は泌尿器科へ相談。</p>
             </div>
             <DeescalationBox />
             <NavBtns />
@@ -713,7 +700,7 @@ export default function App() {
 
         <div style={{ marginTop: 24, fontSize: 11, color: palette.neutral, textAlign: "center", maxWidth: 480 }}>
           本フローチャートは当院の感染対策方針に基づく参考ツールです。<br />
-          最終的な処方変更は医師の判断によります。個別症例は感染症科へコンサルトしてください。
+          最終的な処方変更は医師の判断によります。
         </div>
       </div>
     </div>
